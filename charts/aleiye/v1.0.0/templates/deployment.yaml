@@ -1,0 +1,20 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: {{ template "aleiye.fullname" . }}
+spec:
+  template:
+    metadata:
+      labels:
+        app: {{ template "aleiye.name" . }}
+        release: "{{ .Release.Name }}"
+    spec:
+      containers:
+        - name: aleiye
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy | quote }}
+          ports:
+          - containerPort: 7777
+
+     
+
